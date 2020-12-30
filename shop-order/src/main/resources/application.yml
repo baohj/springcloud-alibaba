@@ -1,0 +1,31 @@
+server:
+  port: 8091
+
+spring:
+  application:
+    name: shop-order
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/tjgx_shop?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password:
+
+# 开启 feign 的熔断功能
+feign:
+  sentinel:
+    enabled: true
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+
+#showSql
+logging:
+  level:
+    com:
+      tjgx:
+        order:
+          mapper: debug

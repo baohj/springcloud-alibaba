@@ -1,0 +1,48 @@
+一、搭建Sentinel控制台
+   1、下载sentienl的jar包，本例使用：sentinel-dashboard-1.7.2.jar，地址：https://github.com/alibaba/Sentinel/releases
+   2、启动命令：java -Dserver.port=8080 -Dcsp.sentinel.dashboard.server=localhost:8080 -Dproject.name=sentinel-dashboard -jar sentinel-dashboard.jar
+   3、访问地址：http://localhost:8080/，8080为Sentinel的默认端口
+   4、输入默认用户名/密码：sentinel/sentinel，进入首页
+二、搭建Sentinel客户端
+   1、引入依赖
+     <!-- alibaba nacos sentinel -->
+     <dependency>
+         <groupId>com.alibaba.cloud</groupId>
+         <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+     </dependency>
+   2、编辑application.yml文件【注意:如果不需要安装 sentinel 监控服务 可以不用配置】
+     spring:
+       cloud:
+         sentinel:
+           transport:
+             # 指定控制台服务的地址
+             dashboard: localhost:8080
+             # 应用与Sentinel控制台交互的端口，应用本地会起一个该端口占用的HttpServer
+             # 默认8719端口，假如端口被占用，依次+1，直到找到未被占用端口
+             port: 8719
+三、流量控制、熔断降级 自定义异常
+   @Component
+   public class SentinelExceptionConfig implements BlockExceptionHandler {
+       @Override
+       public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, BlockException e) {
+       if (e instanceof FlowException) {
+           throw  new MyException(ErrorCode.MYB_111002);
+       } else if (e instanceof DegradeException) {
+           throw  new MyException(ErrorCode.MYB_111004);
+       } else if (e instanceof ParamFlowException) {
+           throw  new MyException(ErrorCode.MYB_200001);
+       } else if (e instanceof AuthorityException) {
+           throw  new MyException(ErrorCode.MYB_200003);
+       } else if (e instanceof SystemBlockException) {
+           throw  new MyException(ErrorCode.MYB_200004);
+       }
+       }
+   }
+四、feign 和 sentinel 整合
+    1、开启 feign 的熔断功能,需要在配置文件新增如下配置:
+      feign:
+        sentinel:
+          enabled: true
+
+
+
