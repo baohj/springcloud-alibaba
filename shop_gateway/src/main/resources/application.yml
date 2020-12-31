@@ -1,0 +1,20 @@
+server:
+  port: 8061
+
+spring:
+  application:
+    name: shop-gateway
+  cloud:
+    gateway:
+      routes:
+      - id: shop_order
+        uri: http://localhost:8091
+        predicates:
+        - Path=/shop_order/**
+      - id: shop_product
+        uri: http://localhost:8081
+        predicates:
+        - Path=/shop_product/**
+        filters:
+        - StripPrefix=1
+

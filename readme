@@ -39,10 +39,45 @@
        }
    }
 四、feign 和 sentinel 整合
-    1、开启 feign 的熔断功能,需要在配置文件新增如下配置:
+    1、引入 feign 依赖
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+            </dependency>
+    2、开启 feign 的熔断功能,需要在配置文件新增如下配置:
       feign:
         sentinel:
           enabled: true
+     3、启动类添加注解 @EnableFeignClients
+
+五、整合 nacos
+    1、引入依赖
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            </dependency>
+     2、添加配置
+         spring:
+           application:
+             name: shop-product
+           cloud:
+             nacos:
+               discovery:
+                 server-addr: 127.0.0.1:8848
+     3、启动类添加注解
+     @EnableDiscoveryClient
+
+五、网关项目 不需要引入web相关，只需要引入下面的依赖即可：
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-gateway</artifactId>
+            </dependency>
+
+            <dependency>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            </dependency>
+
 
 
 
