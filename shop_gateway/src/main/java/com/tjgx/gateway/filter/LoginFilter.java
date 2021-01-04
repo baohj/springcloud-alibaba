@@ -1,5 +1,7 @@
 package com.tjgx.gateway.filter;
 
+import com.tjgx.gateway.exception.ErrorCode;
+import com.tjgx.gateway.exception.MyException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -32,9 +34,7 @@ public class LoginFilter  implements GlobalFilter, Ordered {
         String token = exchange.getRequest().getQueryParams().getFirst("token");
         log.info("token = {}",token);
         if(StringUtils.isEmpty(token)){
-            exchange.getResponse();
-
-
+            throw new MyException(ErrorCode.MYB_200012);
         }
         //继续往下执行
         return chain.filter(exchange);
