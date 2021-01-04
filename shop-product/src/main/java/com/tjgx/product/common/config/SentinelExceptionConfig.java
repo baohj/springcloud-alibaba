@@ -7,8 +7,8 @@ import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowException;
 import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowException;
 import com.alibaba.csp.sentinel.slots.system.SystemBlockException;
-import com.tjgx.product.common.exception.ErrorCode;
-import com.tjgx.product.common.exception.MyException;
+import com.tjgx.common.product.exception.ErrorCode;
+import com.tjgx.common.product.exception.MyException;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;

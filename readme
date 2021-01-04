@@ -67,7 +67,8 @@
      3、启动类添加注解
      @EnableDiscoveryClient
 
-五、网关项目 不需要引入web相关，只需要引入下面的依赖即可：
+五、网关项目
+    1、不需要引入web相关，只需要引入下面的依赖即可：
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-gateway</artifactId>
@@ -77,6 +78,34 @@
                     <groupId>org.springframework.cloud</groupId>
                     <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
             </dependency>
+   2、启动类添加注解
+      @EnableDiscoveryClient
+   3、添加配置：
+      spring:
+        cloud:
+          nacos:
+            discovery:
+              server-addr: 127.0.0.1:8848
+          gateway:
+            discovery:
+              locator:
+                enabled: true #开启从注册中心动态创建路由的功能，利用微服务名进行路由
+            routes:
+            - id: shop_order
+              uri: lb://shop-order
+              predicates:
+              - Path=/model_order/**
+              filters:
+              - StripPrefix=1
+            - id: shop_product
+              uri: lb://shop-product
+              predicates:
+              - Path=/model_product/**
+              filters:
+              - StripPrefix=1
+        【注意】
+          1、StripPrefix 的作用是在拼接访问地址时。去掉断言中的 model_order ，否则会访问 lb://shop-order/model_order/**，报404错误
+          2、自定义断言和过滤器配置时，前面需要加 “-”
 
 
 

@@ -10,8 +10,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 *@Author: 鲍红建
 *@date: 2020/12/28
 */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.tjgx.*"})
 @EnableDiscoveryClient
+@EnableFeignClients(basePackages = {"com.tjgx.*"})
 public class UserStart {
 
     public static void main(String[] args) {

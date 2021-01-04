@@ -1,4 +1,4 @@
-package com.tjgx.product.common.exception;
+package com.tjgx.common.product.exception;
 
 
 public class MyException extends RuntimeException {

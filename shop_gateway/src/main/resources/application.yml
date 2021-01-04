@@ -14,12 +14,14 @@ spring:
           enabled: true #开启从注册中心动态创建路由的功能，利用微服务名进行路由
       routes:
       - id: shop_order
-        uri: http://localhost:8091
+        uri: lb://shop-order
         predicates:
-        - Path=/shop_order/**
+        - Path=/model_order/**
+        filters:
+        - StripPrefix=1
       - id: shop_product
-        uri: http://localhost:8081
+        uri: lb://shop-product
         predicates:
-        - Path=/shop_product/**
+        - Path=/model_product/**
         filters:
         - StripPrefix=1

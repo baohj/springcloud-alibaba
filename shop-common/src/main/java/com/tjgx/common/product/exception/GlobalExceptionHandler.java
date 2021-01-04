@@ -1,4 +1,4 @@
-package com.tjgx.product.common.exception;
+package com.tjgx.common.product.exception;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
