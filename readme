@@ -67,7 +67,7 @@
      3、启动类添加注解
      @EnableDiscoveryClient
 
-五、网关项目
+六、网关项目
     1、不需要引入web相关，只需要引入下面的依赖即可：
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -106,6 +106,16 @@
         【注意】
           1、StripPrefix 的作用是在拼接访问地址时。去掉断言中的 model_order ，否则会访问 lb://shop-order/model_order/**，报404错误
           2、自定义断言和过滤器配置时，前面需要加 “-”
+    4、重点:
+       网关自定义全局异常统一处理，事例：GlobalGatewayExceptionHandler
+
+七、整合 链路追踪 sleuth
+    1、引入依赖
+       <dependency>
+          <groupId>org.springframework.cloud</groupId>
+          <artifactId>spring-cloud-starter-sleuth</artifactId>
+       </dependency>
+
 
 
 

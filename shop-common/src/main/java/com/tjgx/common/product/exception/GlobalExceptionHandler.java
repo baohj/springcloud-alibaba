@@ -2,6 +2,7 @@ package com.tjgx.common.product.exception;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 @ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+    @Value("${spring.application.name}")
+    private String  projectName;
 
     @ResponseBody
     @ExceptionHandler
@@ -29,7 +32,8 @@ public class GlobalExceptionHandler {
             rs = new Result(errorCode.getCode(), errorCode.getDes());
         }
         log.error("异常:", e);
-        log.error("@返回异常信息:{}", JSON.toJSONString(rs));
+        log.info("@响应参数:{}",JSON.toJSONString(rs));
+        log.error("@========================end-{}========================",projectName);
         return rs;
     }
 
