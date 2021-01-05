@@ -38,7 +38,7 @@ public class OrderApi {
      * 方案一缺点：调用接口之前需要知道服务的域名和端口，并且不能支持负载均衡
      */
     @ApiOperation("获取用户")
-    @PostMapping("/getOrder/{orderId}")
+    @GetMapping("/getOrder/{orderId}")
     public GetOrderOut getOrder(@PathVariable Integer orderId){
         log.info("获取订单信息,入参:orderId = {}",orderId);
         Order order = orderMapper.selectById(orderId);
@@ -63,7 +63,7 @@ public class OrderApi {
      * @return
      */
     @ApiOperation("获取用户")
-    @PostMapping("/findOrder/{orderId}")
+    @GetMapping("/findOrder/{orderId}")
     public GetOrderOut  findOrder(@PathVariable Integer orderId){
         log.info("获取订单信息,入参:orderId = {}",orderId);
         Order order = orderMapper.selectById(orderId);
@@ -88,7 +88,7 @@ public class OrderApi {
      * @return
      */
     @ApiOperation("获取用户")
-    @PostMapping("/fetchOrder/{orderId}")
+    @GetMapping("/fetchOrder/{orderId}")
     public GetOrderOut  fetchOrder(@PathVariable Integer orderId){
         log.info("获取订单信息,入参:orderId = {}",orderId);
         Order order = orderMapper.selectById(orderId);
