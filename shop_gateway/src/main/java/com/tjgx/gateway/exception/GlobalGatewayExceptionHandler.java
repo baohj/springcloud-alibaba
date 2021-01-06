@@ -57,7 +57,6 @@ public class GlobalGatewayExceptionHandler implements ErrorWebExceptionHandler {
         /**
          * 错误记录
          */
-        ServerHttpRequest request = exchange.getRequest();
         if (exchange.getResponse().isCommitted()) {
             return Mono.error(ex);
         }

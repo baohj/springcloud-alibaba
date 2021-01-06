@@ -3,9 +3,11 @@ package com.tjgx.common.product.exception;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @ApiModel
+@NoArgsConstructor
 public class Result<T> {
     @ApiModelProperty(value = "响应码，000000 表示成功;其他为请求失败")
     private String code;

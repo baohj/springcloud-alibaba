@@ -1,9 +1,11 @@
 package com.tjgx.gateway.filter;
 
+import com.alibaba.fastjson.JSON;
 import com.tjgx.gateway.exception.ErrorCode;
 import com.tjgx.gateway.exception.MyException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -20,6 +22,8 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class LoginFilter  implements GlobalFilter, Ordered {
 
+/*    @Autowired
+    private ProductFeignClient feignClient;*/
     /**
      * 执行过滤器中的业务逻辑
      *     对请求参数中的token进行判断
@@ -33,7 +37,9 @@ public class LoginFilter  implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String token = exchange.getRequest().getQueryParams().getFirst("token");
         log.info("token = {}",token);
-       /* if(StringUtils.isEmpty(token)){
+/*        String list = feignClient.getProduct();
+        log.info("网关过滤器调用微服务:{}", JSON.toJSONString(list));*/
+        /*if(StringUtils.isEmpty(token)){
             throw new MyException(ErrorCode.MYB_200012);
         }*/
         //继续往下执行

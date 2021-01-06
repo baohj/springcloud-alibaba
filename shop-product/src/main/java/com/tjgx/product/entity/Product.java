@@ -14,7 +14,6 @@ import java.math.BigDecimal;
 *@date: 2020/12/28
 */
 @Data
-@ApiModel
 @TableName("tjgx_product")
 public class Product {
 

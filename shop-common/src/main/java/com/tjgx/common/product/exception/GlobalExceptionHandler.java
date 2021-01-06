@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
             ErrorCode errorCode = my.getErrorCode();
             rs = new Result(errorCode.getCode(), errorCode.getDes());
         }
-        log.error("异常:", e);
+        log.error("全局异常统一处理:", e);
         log.info("@响应参数:{}",JSON.toJSONString(rs));
         log.error("@========================end-{}========================",projectName);
         return rs;

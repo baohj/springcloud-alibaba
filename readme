@@ -109,8 +109,8 @@
     4、重点:
        网关自定义全局异常统一处理，事例：GlobalGatewayExceptionHandler
 
-七、整合 链路追踪 sleuth
-    1、引入依赖
+七、整合链路追踪 sleuth
+    1、引入依赖【每个微服务都要引入，包括网关】
        <dependency>
           <groupId>org.springframework.cloud</groupId>
           <artifactId>spring-cloud-starter-sleuth</artifactId>

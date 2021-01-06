@@ -1,7 +1,13 @@
 package com.tjgx.order.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.tjgx.common.product.exception.ErrorCode;
+import com.tjgx.common.product.exception.MyException;
+import com.tjgx.common.product.exception.Result;
+import com.tjgx.common.product.vo.ProductOut;
+import com.tjgx.common.product.vo.UserOut;
 import com.tjgx.order.dto.GetOrderOut;
 import com.tjgx.order.entity.Order;
 import com.tjgx.common.product.feignClient.ProductFeignClient;
@@ -13,6 +19,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 /**
 *@Description:
@@ -48,11 +56,11 @@ public class OrderApi {
         log.info("查询产品信息,入参:productId = {}",productId);
        String  str= restTemplate.getForObject("http://localhost:8081/product/getProduct/"+productId, String.class);
         log.info("查询产品信息,出参:{}",str);
-        JSONObject josn = JSONObject.parseObject(str);
+        List<ProductOut> list = JSONArray.parseArray(str, ProductOut.class);
 
         GetOrderOut getOrderOut = new GetOrderOut();
         BeanUtils.copyProperties(order,getOrderOut);
-        getOrderOut.setProductName(josn.getString("productName"));
+        getOrderOut.setProductName(list);
         return getOrderOut;
     }
 
@@ -73,11 +81,10 @@ public class OrderApi {
         log.info("查询产品信息,入参:productId = {}",productId);
         String  str= restTemplate.getForObject("http://shop-product/product/getProduct/"+productId, String.class);
         log.info("查询产品信息,出参:{}",str);
-        JSONObject josn = JSONObject.parseObject(str);
-
+        List<ProductOut> list = JSONArray.parseArray(str, ProductOut.class);
         GetOrderOut getOrderOut = new GetOrderOut();
         BeanUtils.copyProperties(order,getOrderOut);
-        getOrderOut.setProductName(josn.getString("productName"));
+        getOrderOut.setProductName(list);
         return getOrderOut;
     }
 
@@ -97,13 +104,13 @@ public class OrderApi {
         Integer productId = order.getProductId();
         log.info("查询产品信息,入参:productId = {}",productId);
 
-        String  str= productFeignClient.getProduct(productId);
-        log.info("查询产品信息,出参:{}",str);
-        JSONObject josn = JSONObject.parseObject(str);
+        String result = productFeignClient.getProduct();
+
+        List<ProductOut> list = JSONArray.parseArray(result, ProductOut.class);
 
         GetOrderOut getOrderOut = new GetOrderOut();
         BeanUtils.copyProperties(order,getOrderOut);
-        getOrderOut.setProductName(josn.getString("productName"));
+        getOrderOut.setProductName(list);
         return getOrderOut;
     }
 
@@ -121,6 +128,14 @@ public class OrderApi {
             int i = 9/0;
         }
         return "throwException";
+    }
+
+
+    @ApiOperation("获取用户")
+    @GetMapping("/getUser")
+    public Result<List<UserOut>> getUser(){
+        Result<List<UserOut>> result = productFeignClient.getUser();
+        return result;
     }
 
 

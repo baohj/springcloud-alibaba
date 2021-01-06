@@ -1,4 +1,4 @@
-package com.tjgx.user.common;
+package com.tjgx.user.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
