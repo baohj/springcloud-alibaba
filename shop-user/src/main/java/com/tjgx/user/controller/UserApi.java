@@ -35,7 +35,7 @@ public class UserApi {
     @PostMapping("/getUser")
     public Result<List<UserOut>> getUser(){
         try {
-            Thread.sleep(40000);
+            Thread.sleep(10000);
         }catch (Exception e){
 
         }

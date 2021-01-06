@@ -1,5 +1,6 @@
 package com.tjgx.gateway.exception;
 
+import com.alibaba.fastjson.JSON;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
@@ -61,12 +62,12 @@ public class GlobalGatewayExceptionHandler implements ErrorWebExceptionHandler {
             return Mono.error(ex);
         }
         exceptionHandlerResult.set(map);
+        log.error("@响应数据:{}",JSON.toJSONString(map));
         ServerRequest newRequest = ServerRequest.create(exchange, this.messageReaders);
         return RouterFunctions.route(RequestPredicates.all(), this::renderErrorResponse).route(newRequest)
                 .switchIfEmpty(Mono.error(ex))
                 .flatMap((handler) -> handler.handle(newRequest))
                 .flatMap((response) -> write(exchange, response));
-
     }
 
     /**

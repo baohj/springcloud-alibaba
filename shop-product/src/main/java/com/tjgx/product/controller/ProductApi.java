@@ -13,8 +13,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,12 +34,17 @@ public class ProductApi {
     private UserFeignClient userFeignClient;
 
     @ApiOperation("获取产品")
-    @PostMapping("/getProduct")
+    @GetMapping("/getProduct")
     public String getProduct(){
+        try {
+            Thread.sleep(8000);
+        }catch (Exception e){
+
+        }
         List<Product> product = productMapper.selectList(null);
         List<ProductOut> lt = product.stream().map(v -> {
             ProductOut productOut = new ProductOut();
-            BeanUtils.copyProperties(product, productOut);
+            BeanUtils.copyProperties(v, productOut);
             return productOut;
         }).collect(Collectors.toList());
         return JSON.toJSONString(lt);

@@ -20,7 +20,7 @@ import java.util.List;
 public interface ProductFeignClient {
 
 
-    @PostMapping("/getProduct")
+    @GetMapping("/getProduct")
     String getProduct();
 
     @PostMapping("/getUser")
