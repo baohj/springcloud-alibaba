@@ -18,6 +18,6 @@ import java.util.List;
 @FeignClient(name = "shop-user",path = "/user",fallbackFactory = UserFeignFallbackFactory.class )
 public interface UserFeignClient {
 
-    @GetMapping("/getUser")
+    @PostMapping("/getUser")
     Result<List<UserOut>> getUser();
 }

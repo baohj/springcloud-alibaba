@@ -36,7 +36,7 @@ public class ProductApi {
     private UserFeignClient userFeignClient;
 
     @ApiOperation("获取产品")
-    @GetMapping("/getProduct")
+    @PostMapping("/getProduct")
     public String getProduct(){
         List<Product> product = productMapper.selectList(null);
         List<ProductOut> lt = product.stream().map(v -> {
@@ -48,7 +48,7 @@ public class ProductApi {
     }
 
     @ApiOperation("获取用户")
-    @GetMapping("/getUser")
+    @PostMapping("/getUser")
     public Result<List<UserOut>> getUser(){
         Result<List<UserOut>> result = userFeignClient.getUser();
         return result;

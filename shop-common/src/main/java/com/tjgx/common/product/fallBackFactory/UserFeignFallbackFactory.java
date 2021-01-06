@@ -1,7 +1,6 @@
 package com.tjgx.common.product.fallBackFactory;
 
 import com.tjgx.common.product.exception.Result;
-import com.tjgx.common.product.feignClient.ProductFeignClient;
 import com.tjgx.common.product.feignClient.UserFeignClient;
 import com.tjgx.common.product.vo.UserOut;
 import feign.hystrix.FallbackFactory;

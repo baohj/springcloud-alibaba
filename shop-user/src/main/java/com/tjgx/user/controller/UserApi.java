@@ -32,10 +32,10 @@ public class UserApi {
     private UserMapper userMapper;
 
     @ApiOperation("获取用户")
-    @GetMapping("/getUser")
+    @PostMapping("/getUser")
     public Result<List<UserOut>> getUser(){
         try {
-            Thread.sleep(10000);
+            Thread.sleep(40000);
         }catch (Exception e){
 
         }
