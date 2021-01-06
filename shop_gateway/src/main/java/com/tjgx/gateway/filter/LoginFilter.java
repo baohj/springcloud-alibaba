@@ -37,8 +37,8 @@ public class LoginFilter  implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String token = exchange.getRequest().getQueryParams().getFirst("token");
         log.info("token = {}",token);
-        String list = feignClient.getProduct();
-        log.info("网关过滤器调用微服务:{}", JSON.toJSONString(list));
+      /*  String list = feignClient.getProduct();
+        log.info("网关过滤器调用微服务:{}", JSON.toJSONString(list));*/
         /*if(StringUtils.isEmpty(token)){
             throw new MyException(ErrorCode.MYB_200012);
         }*/
