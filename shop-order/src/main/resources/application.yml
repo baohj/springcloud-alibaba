@@ -23,6 +23,7 @@ spring:
 ribbon:
   ReadTimeout: 30000      # 指的是建立连接所用的时间，适用于网络状况正常的情况下，两端连接所用的时间。
   ConnectTimeout: 30000   # 指的是建立连接后从服务器读取到可用资源所用的时间。
+
 # 开启 feign 的熔断功能
 feign:
   sentinel:
