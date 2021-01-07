@@ -23,7 +23,6 @@ public class OrderStart {
     public static void main(String[] args) {
         SpringApplication.run(OrderStart.class, args);
     }
-
     @Bean
     @LoadBalanced
     public RestTemplate restTemplate() {
