@@ -116,25 +116,42 @@
           <artifactId>spring-cloud-starter-sleuth</artifactId>
        </dependency>
 八、整合kafka，收集日志
-      <dependency>
-           <groupId>com.github.danielwegener</groupId>
-           <artifactId>logback-kafka-appender</artifactId>
-           <version>0.2.0-RC2</version>
-       </dependency>
-       <dependency>
-           <groupId>net.logstash.logback</groupId>
-           <artifactId>logstash-logback-encoder</artifactId>
-           <version>6.1</version>
-       </dependency>
-       <dependency>
-           <groupId>ch.qos.logback</groupId>
-           <artifactId>logback-classic</artifactId>
-           <version>1.2.3</version>
-       </dependency>
+      1、引入依赖
+          <dependency>
+               <groupId>com.github.danielwegener</groupId>
+               <artifactId>logback-kafka-appender</artifactId>
+               <version>0.2.0-RC2</version>
+           </dependency>
+           <dependency>
+               <groupId>net.logstash.logback</groupId>
+               <artifactId>logstash-logback-encoder</artifactId>
+               <version>6.1</version>
+           </dependency>
+           <dependency>
+               <groupId>ch.qos.logback</groupId>
+               <artifactId>logback-classic</artifactId>
+               <version>1.2.3</version>
+           </dependency>
+       2、新增logback-spring.xml配置文件添加配置：
+           <!-- This is the kafkaAppender -->
+              <appender name="kafkaAppender" class="com.github.danielwegener.logback.kafka.KafkaAppender">
+                  <encoder>
+                      <pattern>${myFilePattern}</pattern>
+                  </encoder>
+                  <topic>tjgx-log</topic>
+                  <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.NoKeyKeyingStrategy" />
+                  <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy" />
+                  <!-- <partition>0</partition> -->
+                  <producerConfig>bootstrap.servers=localhost:9092</producerConfig>
+              </appender>
+              <root level="info">
+                  <appender-ref ref="console" />
+              </root>
 
 
 细节：
   1、只有 get 请求 才会请求重试，post 请求则不会进行请求重试
+  2、解决本地调用远程微服务问题，让本地服务只订阅 不注册成为服务，让其他应用调用即可
 
 
 
