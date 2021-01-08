@@ -16,8 +16,7 @@ import java.util.List;
 *@Author: 鲍红建
 *@date: 2020/12/29
 */
-/*@FeignClient(name = "shop-product",path = "/product",fallbackFactory = ProductFeignFallbackFactory.class )*/
-@FeignClient(name = "shop-product",path = "/product")
+@FeignClient(name = "shop-product",path = "/product",fallbackFactory = ProductFeignFallbackFactory.class )
 public interface ProductFeignClient {
 
 
