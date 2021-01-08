@@ -147,7 +147,27 @@
               <root level="info">
                   <appender-ref ref="console" />
               </root>
-
+九、引入nacos 配置中心功能
+    1、依赖
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+     2、新增bootstrap.xml 配置，
+            spring:
+              profiles:
+                active: dev
+              application:
+                name: shop-order
+              cloud:
+                nacos:
+                  config:
+                    server-addr: 127.0.0.1:8848
+                    prefix: ${spring.application.name}
+                    file-extension: yml
+                    namespace: efff8d49-4265-4694-8bc0-4a59e53b826c
+                    group: baohongjian-springcloudAlibaba
+    3、自动刷需要在类上加  @RefreshScope
 
 细节：
   1、只有 get 请求 才会请求重试，post 请求则不会进行请求重试

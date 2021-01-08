@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: shop-order
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        prefix: ${spring.application.name}
+        file-extension: yml
+        namespace: efff8d49-4265-4694-8bc0-4a59e53b826c
+        group: baohongjian-springcloudAlibaba

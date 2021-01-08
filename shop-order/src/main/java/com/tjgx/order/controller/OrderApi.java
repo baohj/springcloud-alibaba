@@ -17,6 +17,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,6 +33,7 @@ import java.util.List;
 @RequestMapping("/order")
 @Api(tags = "订单模块【鲍红建】")
 @Slf4j
+@RefreshScope
 public class OrderApi {
 
     @Autowired
@@ -40,6 +43,10 @@ public class OrderApi {
 
     @Autowired
     private ProductFeignClient productFeignClient;
+
+
+    @Value("${spring.application.name}")
+    private String projectName;
 
     /**
      * 微服务调用：
@@ -118,6 +125,7 @@ public class OrderApi {
     @GetMapping("/flowLimit")
     public String  flowLimit(){
         log.info("sentinel 流控效果测试");
+        log.info("读取配置:{}",projectName);
         return "flowLimit";
     }
 
