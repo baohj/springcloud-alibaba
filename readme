@@ -115,6 +115,22 @@
           <groupId>org.springframework.cloud</groupId>
           <artifactId>spring-cloud-starter-sleuth</artifactId>
        </dependency>
+八、整合kafka，收集日志
+      <dependency>
+           <groupId>com.github.danielwegener</groupId>
+           <artifactId>logback-kafka-appender</artifactId>
+           <version>0.2.0-RC2</version>
+       </dependency>
+       <dependency>
+           <groupId>net.logstash.logback</groupId>
+           <artifactId>logstash-logback-encoder</artifactId>
+           <version>6.1</version>
+       </dependency>
+       <dependency>
+           <groupId>ch.qos.logback</groupId>
+           <artifactId>logback-classic</artifactId>
+           <version>1.2.3</version>
+       </dependency>
 
 
 细节：
