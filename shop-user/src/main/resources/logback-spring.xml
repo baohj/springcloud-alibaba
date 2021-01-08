@@ -12,19 +12,19 @@
     </appender>
 
     <!-- This is the kafkaAppender -->
-    <appender name="kafkaAppender" class="com.github.danielwegener.logback.kafka.KafkaAppender">
+   <!-- <appender name="kafkaAppender" class="com.github.danielwegener.logback.kafka.KafkaAppender">
         <encoder>
             <pattern>${myFilePattern}</pattern>
         </encoder>
         <topic>tjgx-log</topic>
         <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.NoKeyKeyingStrategy" />
         <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy" />
-        <!-- <partition>0</partition> -->
+        &lt;!&ndash; <partition>0</partition> &ndash;&gt;
         <producerConfig>bootstrap.servers=localhost:9092</producerConfig>
-    </appender>
+    </appender>-->
 
     <root level="info">
-        <appender-ref ref="kafkaAppender" />
+        <!--<appender-ref ref="kafkaAppender" />-->
         <appender-ref ref="console" />
     </root>
 </configuration>
