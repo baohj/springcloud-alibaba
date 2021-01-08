@@ -2,11 +2,12 @@
 
     <!--读取application.yml配置文件-->
     <springProperty scope="context" name="serviceName" source="spring.application.name" defaultValue="UnknownService"/>
-    <property name="myPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) [${serviceName},%yellow(%X{X-B3-TraceId}),%green(%X{X-B3-SpanId})] %green(%logger:%L):%msg%n"/>
+    <property name="myConsolePattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) [${serviceName},%yellow(%X{X-B3-TraceId}),%green(%X{X-B3-SpanId})] %green(%logger:%L):%msg%n"/>
+    <property name="myFilePattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [${serviceName},%X{X-B3-TraceId},%X{X-B3-SpanId}] %logger:%L:%msg%n"/>
 
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>${myPattern}</pattern>
+            <pattern>${myConsolePattern}</pattern>
         </encoder>
     </appender>
 
@@ -19,32 +20,15 @@
             <MaxHistory>30</MaxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>${myPattern}</pattern>
+            <pattern>${myFilePattern}</pattern>
             <charset>UTF-8</charset>
         </encoder>
     </appender>
 
     <!-- This is the kafkaAppender -->
     <appender name="kafkaAppender" class="com.github.danielwegener.logback.kafka.KafkaAppender">
-        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-            <providers class="net.logstash.logback.composite.loggingevent.LoggingEventJsonProviders">
-                <pattern>
-                    <pattern>
-                        {
-                        "severity": "%level",
-                        "service": "${serviceName:-}",
-                        "trace": "%X{X-B3-TraceId:-}",
-                        "span": "%X{X-B3-SpanId:-}",
-                        "parent": "%X{X-B3-ParentSpanId:-}",
-                        "exportable": "%X{X-Span-Export:-}",
-                        "pid": "${PID:-}",
-                        "thread": "%thread",
-                        "class": "%logger{40}",
-                        "rest": "%message"
-                        }
-                    </pattern>
-                </pattern>
-            </providers>
+        <encoder>
+            <pattern>${myFilePattern}</pattern>
         </encoder>
         <topic>tjgx-log</topic>
         <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.NoKeyKeyingStrategy" />
