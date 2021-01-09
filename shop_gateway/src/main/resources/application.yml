@@ -29,12 +29,12 @@ spring:
       - id: shop_order
         uri: lb://shop-order
         predicates:
-        - Path=/model_order/**
+        - Path=/shop-order/**
         filters:
         - StripPrefix=1
       - id: shop_product
         uri: lb://shop-product
         predicates:
-        - Path=/model_product/**
+        - Path=/shop-product/**
         filters:
         - StripPrefix=1

@@ -70,6 +70,16 @@
             <version>1.2.3</version>
         </dependency>
 
+        <!--引入swagger2依赖-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+
     </dependencies>
 
 

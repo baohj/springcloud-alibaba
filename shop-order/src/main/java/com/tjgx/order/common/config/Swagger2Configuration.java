@@ -23,11 +23,7 @@ public class Swagger2Configuration {
     @Bean
     public Docket buildDocket() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(buildApiInf())
-                .select()
-                .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any())
-                .build();
+                .apiInfo(buildApiInf());
 
     }
 
