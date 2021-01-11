@@ -21,6 +21,8 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+        namespace: 1d75ab91-2bba-4bdc-8479-7c63c5a30321
+        group: shop-group
     gateway:
       discovery:
         locator:

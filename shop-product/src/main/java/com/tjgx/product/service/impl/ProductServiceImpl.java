@@ -7,6 +7,7 @@ import com.tjgx.product.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -16,6 +17,8 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductMapper productMapper;
 
+    @Override
+    @Transactional
     public Result saveProduct(){
         Product product = new Product();
         product.setPrice(new BigDecimal(100));

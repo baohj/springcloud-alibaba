@@ -14,6 +14,8 @@ spring:
 #        group: shop-group
       discovery:
         server-addr: 127.0.0.1:8848
+        namespace: 1d75ab91-2bba-4bdc-8479-7c63c5a30321
+        group: shop-group
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/tjgx_shop?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
@@ -40,6 +42,8 @@ ribbon:
 
 
 seata:
+  application-id: ${spring.application.name}
+  tx-service-group: my_test_tx_group
   config:
     type: nacos
     nacos:

@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.signature.qual.IdentifierOrArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -32,7 +33,8 @@ public class OrderServiceImpl implements OrderService {
     private UserFeignClient userFeignClient;
 
     @Override
-  /*  @GlobalTransactional*/
+    @GlobalTransactional
+    @Transactional
     public Result saveOrder(){
         /**
          * 新增订单

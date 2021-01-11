@@ -7,6 +7,7 @@ import com.tjgx.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
@@ -14,6 +15,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Override
+    @Transactional
     public Result saveUser(){
         User user = new User();
         user.setUserId(100);
@@ -21,6 +24,8 @@ public class UserServiceImpl implements UserService {
         user.setTelephone("18310536874");
         user.setPassword("123456");
         userMapper.insert(user);
+        int i =0;
+        int f = 5 / i;
         return Result.Ok;
     }
 }
