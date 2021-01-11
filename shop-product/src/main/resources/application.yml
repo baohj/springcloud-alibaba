@@ -6,6 +6,12 @@ spring:
     name: shop-product
   cloud:
     nacos:
+#      config:
+#        server-addr: 127.0.0.1:8848
+#        prefix: ${spring.application.name}
+#        file-extension: yml
+#        namespace: 1d75ab91-2bba-4bdc-8479-7c63c5a30321
+#        group: shop-group
       discovery:
         server-addr: 127.0.0.1:8848
   datasource:
@@ -31,3 +37,19 @@ logging:
 ribbon:
   ReadTimeout: 5000      # 指的是建立连接所用的时间，适用于网络状况正常的情况下，两端连接所用的时间。
   ConnectTimeout: 5000   # 指的是建立连接后从服务器读取到可用资源所用的时间。
+
+
+seata:
+  config:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      namespace: 1d75ab91-2bba-4bdc-8479-7c63c5a30321
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      group : SEATA_GROUP
+      namespace: 1d75ab91-2bba-4bdc-8479-7c63c5a30321

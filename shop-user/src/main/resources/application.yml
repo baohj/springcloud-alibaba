@@ -6,6 +6,12 @@ spring:
     name: shop-user
   cloud:
     nacos:
+#      config:
+#        server-addr: 127.0.0.1:8848
+#        prefix: ${spring.application.name}
+#        file-extension: yml
+#        namespace: 1d75ab91-2bba-4bdc-8479-7c63c5a30321
+#        group: shop-group
       discovery:
         server-addr: 127.0.0.1:8848
   datasource:
@@ -32,3 +38,18 @@ logging:
       tjgx:
         user:
           mapper: debug
+
+seata:
+  config:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      namespace: 1d75ab91-2bba-4bdc-8479-7c63c5a30321
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      group : SEATA_GROUP
+      namespace: 1d75ab91-2bba-4bdc-8479-7c63c5a30321

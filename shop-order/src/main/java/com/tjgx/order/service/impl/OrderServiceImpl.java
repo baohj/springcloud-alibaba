@@ -6,6 +6,7 @@ import com.tjgx.common.product.feignClient.UserFeignClient;
 import com.tjgx.order.entity.Order;
 import com.tjgx.order.mapper.OrderMapper;
 import com.tjgx.order.service.OrderService;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.signature.qual.IdentifierOrArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private UserFeignClient userFeignClient;
 
+    @Override
+  /*  @GlobalTransactional*/
     public Result saveOrder(){
         /**
          * 新增订单
