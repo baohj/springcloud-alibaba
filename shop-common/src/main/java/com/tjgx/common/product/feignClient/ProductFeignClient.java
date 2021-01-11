@@ -25,4 +25,7 @@ public interface ProductFeignClient {
 
     @PostMapping("/getUser")
     Result<List<UserOut>> getUser();
+
+    @PostMapping("/saveProduct")
+    Result saveProduct();
 }

@@ -31,6 +31,11 @@ public class ProductFeignFallbackFactory implements FallbackFactory<ProductFeign
            public Result<List<UserOut>> getUser() {
                return null;
            }
+
+           @Override
+           public Result saveProduct() {
+               return null;
+           }
        };
     }
 }

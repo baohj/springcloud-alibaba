@@ -20,9 +20,14 @@ public class UserFeignFallbackFactory implements FallbackFactory<UserFeignClient
     @Override
     public UserFeignClient create(Throwable throwable) {
         log.error("远程接口异常:",throwable);
-        return new UserFeignClient(){
+        return new UserFeignClient() {
             @Override
             public Result<List<UserOut>> getUser() {
+                return null;
+            }
+
+            @Override
+            public Result saveUser() {
                 return null;
             }
         };

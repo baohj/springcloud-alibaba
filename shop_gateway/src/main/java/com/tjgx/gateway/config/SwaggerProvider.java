@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @Component
 @Primary
 @Slf4j
-@Profile({"dev","test"})
+/*@Profile({"dev","test"})*/
 public class SwaggerProvider implements SwaggerResourcesProvider {
 
     @Autowired

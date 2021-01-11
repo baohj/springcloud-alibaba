@@ -20,4 +20,7 @@ public interface UserFeignClient {
 
     @PostMapping("/getUser")
     Result<List<UserOut>> getUser();
+
+    @PostMapping("/saveUser")
+    Result saveUser();
 }
