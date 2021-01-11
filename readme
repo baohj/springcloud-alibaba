@@ -148,7 +148,7 @@
                   <appender-ref ref="console" />
               </root>
 九、引入nacos 配置中心功能
-    1、依赖
+     1、依赖
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
@@ -167,7 +167,39 @@
                     file-extension: yml
                     namespace: efff8d49-4265-4694-8bc0-4a59e53b826c
                     group: baohongjian-springcloudAlibaba
-    3、自动刷需要在类上加  @RefreshScope
+     3、自动刷需要在类上加  @RefreshScope
+十、seate 分布式事务
+    1、Seata术语
+       TC (Transaction Coordinator) - 事务协调者
+       维护全局和分支事务的状态，驱动全局事务提交或回滚。
+       TM (Transaction Manager) - 事务管理器
+       定义全局事务的范围：开始全局事务、提交或回滚全局事务。
+       RM (Resource Manager) - 资源管理器
+       管理分支事务处理的资源，与TC交谈以注册分支事务和报告分支事务的状态，并驱动分支事务提交或回滚
+    2、引入依赖
+            <!--引入seata-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+                <!--排除依赖，调整到和seata-server版本一致-->
+                <exclusions>
+                    <exclusion>
+                        <groupId>io.seata</groupId>
+                        <artifactId>seata-spring-boot-starter</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.seata</groupId>
+                        <artifactId>seata-all</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!--与seata-server 版本保持一致-->
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-spring-boot-starter</artifactId>
+                <version>1.4.0</version>
+            </dependency>
+    3、
 
 细节：
   1、只有 get 请求 才会请求重试，post 请求则不会进行请求重试

@@ -8,6 +8,7 @@ import com.tjgx.common.product.vo.ProductOut;
 import com.tjgx.common.product.vo.UserOut;
 import com.tjgx.product.entity.Product;
 import com.tjgx.product.mapper.ProductMapper;
+import com.tjgx.product.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -29,6 +30,9 @@ public class ProductApi {
 
     @Autowired
     private ProductMapper productMapper;
+
+    @Autowired
+    private ProductService productService;
 
     @Autowired
     private UserFeignClient userFeignClient;
@@ -55,5 +59,11 @@ public class ProductApi {
     public Result<List<UserOut>> getUser(){
         Result<List<UserOut>> result = userFeignClient.getUser();
         return result;
+    }
+
+    @ApiOperation("保存产品")
+    @PostMapping("/saveProduct")
+    public Result saveProduct(){
+        return productService.saveProduct();
     }
 }

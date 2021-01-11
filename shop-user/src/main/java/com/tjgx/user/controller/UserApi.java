@@ -4,6 +4,7 @@ import com.tjgx.common.product.exception.Result;
 import com.tjgx.common.product.vo.UserOut;
 import com.tjgx.user.entity.User;
 import com.tjgx.user.mapper.UserMapper;
+import com.tjgx.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,8 @@ public class UserApi {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserService userService;
 
     @ApiOperation("获取用户")
     @PostMapping("/getUser")
@@ -46,5 +49,12 @@ public class UserApi {
             return userOut;
         }).collect(Collectors.toList());
        return Result.success(lt);
+    }
+
+    @ApiOperation("新增用户")
+    @PostMapping("/saveUser")
+    public Result saveUser(){
+
+        return userService.saveUser();
     }
 }

@@ -2,9 +2,6 @@ package com.tjgx.order.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.tjgx.common.product.exception.ErrorCode;
-import com.tjgx.common.product.exception.MyException;
 import com.tjgx.common.product.exception.Result;
 import com.tjgx.common.product.vo.ProductOut;
 import com.tjgx.common.product.vo.UserOut;
@@ -12,6 +9,7 @@ import com.tjgx.order.dto.GetOrderOut;
 import com.tjgx.order.entity.Order;
 import com.tjgx.common.product.feignClient.ProductFeignClient;
 import com.tjgx.order.mapper.OrderMapper;
+import com.tjgx.order.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +41,9 @@ public class OrderApi {
 
     @Autowired
     private ProductFeignClient productFeignClient;
+
+    @Autowired
+    private OrderService orderService;
 
 
     @Value("${spring.application.name}")
@@ -144,6 +145,12 @@ public class OrderApi {
     public Result<List<UserOut>> getUser(){
         Result<List<UserOut>> result = productFeignClient.getUser();
         return result;
+    }
+
+    @ApiOperation("保存订单")
+    @GetMapping("/saveOrder")
+    public Result saveOrder(){
+        return orderService.saveOrder();
     }
 
 
