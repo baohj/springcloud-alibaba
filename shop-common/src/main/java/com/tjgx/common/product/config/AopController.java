@@ -1,15 +1,19 @@
-package com.tjgx.product.common.aop;
+package com.tjgx.common.product.config;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -34,7 +38,7 @@ public class AopController {
 	@Value("${spring.application.name}")
 	private String  projectName;
 
-	@Pointcut("execution(public * com.tjgx.product.controller..*.*(..))")
+	@Pointcut("execution(public * com.tjgx.*.controller..*.*(..))")
 	public void webLog(){}
 
     @Before("webLog()")
