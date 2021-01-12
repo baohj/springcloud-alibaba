@@ -1,5 +1,7 @@
 package com.tjgx.user.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,6 +18,7 @@ import lombok.Data;
 public class User {
 
     @ApiModelProperty("用户id")
+    @TableId(type = IdType.AUTO)
     private Integer userId;
 
     @ApiModelProperty("用户名称")

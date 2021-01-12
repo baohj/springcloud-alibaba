@@ -1,5 +1,7 @@
 package com.tjgx.order.service.impl;
 
+import com.tjgx.common.product.exception.ErrorCode;
+import com.tjgx.common.product.exception.MyException;
 import com.tjgx.common.product.exception.Result;
 import com.tjgx.common.product.feignClient.ProductFeignClient;
 import com.tjgx.common.product.feignClient.UserFeignClient;
@@ -8,7 +10,6 @@ import com.tjgx.order.mapper.OrderMapper;
 import com.tjgx.order.service.OrderService;
 import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
-import org.checkerframework.checker.signature.qual.IdentifierOrArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,10 +51,14 @@ public class OrderServiceImpl implements OrderService {
          * 新增产品
          */
         productFeignClient.saveProduct();
+
         /**
          * 新增用户
          */
-        userFeignClient.saveUser();
+        Result re = userFeignClient.saveUser();
+        if(!re.getCode().equals(ErrorCode.MYB_000000.getCode())){
+            throw new MyException(ErrorCode.MYB_200002);
+        }
         return Result.Ok;
     }
 }

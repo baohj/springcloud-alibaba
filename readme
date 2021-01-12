@@ -199,7 +199,32 @@
                 <artifactId>seata-spring-boot-starter</artifactId>
                 <version>1.4.0</version>
             </dependency>
-    3、
+    3、安裝seata-server,初始化nacos配置时，需要新增：
+        service.vgroupMapping.shop-user=default
+        service.vgroupMapping.shop-order=default
+        service.vgroupMapping.shop-product=default
+    4、配置每个微服务项目
+       spring:
+         application:
+           name: shop-order
+         cloud:
+           alibaba:
+             seata:
+               tx-service-group: ${spring.application.name}
+       seata:
+         config:
+           type: nacos
+           nacos:
+             server-addr: 127.0.0.1:8848
+             group: SEATA_GROUP
+             namespace: 1d75ab91-2bba-4bdc-8479-7c63c5a30321
+         registry:
+           type: nacos
+           nacos:
+             server-addr: 127.0.0.1:8848
+             group : SEATA_GROUP
+             namespace: 1d75ab91-2bba-4bdc-8479-7c63c5a30321
+    5、如果项目做了异常统一处理，在调用微服务后，需要判断返回结果，如果失败，需要抛出异常，才能回滚
 
 细节：
   1、只有 get 请求 才会请求重试，post 请求则不会进行请求重试

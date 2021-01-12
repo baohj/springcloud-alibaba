@@ -16,7 +16,11 @@ spring:
         server-addr: 127.0.0.1:8848
         namespace: 1d75ab91-2bba-4bdc-8479-7c63c5a30321
         group: shop-group
+    alibaba:
+      seata:
+        tx-service-group: ${spring.application.name}
   datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/tjgx_shop?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
     username: root
@@ -35,15 +39,17 @@ logging:
         product:
           mapper: debug
 
-###设置feign客户端超时时间
-ribbon:
-  ReadTimeout: 5000      # 指的是建立连接所用的时间，适用于网络状况正常的情况下，两端连接所用的时间。
-  ConnectTimeout: 5000   # 指的是建立连接后从服务器读取到可用资源所用的时间。
-
+# 开启 feign 的熔断功能,设置feign客户端超时时间
+feign:
+  sentinel:
+    enabled: true
+  client:
+    config:
+      default:
+        readTimeout: 10000
+        connectTimeout: 10000
 
 seata:
-  application-id: ${spring.application.name}
-  tx-service-group: my_test_tx_group
   config:
     type: nacos
     nacos:
@@ -53,7 +59,6 @@ seata:
   registry:
     type: nacos
     nacos:
-      application: seata-server
       server-addr: 127.0.0.1:8848
       group : SEATA_GROUP
       namespace: 1d75ab91-2bba-4bdc-8479-7c63c5a30321
