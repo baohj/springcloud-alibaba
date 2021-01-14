@@ -104,8 +104,8 @@ public class OrderApi {
      */
     @ApiOperation("获取用户")
     @GetMapping("/fetchOrder/{orderId}")
-    public GetOrderOut  fetchOrder(@PathVariable Integer orderId){
-        log.info("获取订单信息,入参:orderId = {}",orderId);
+    public GetOrderOut  fetchOrder(@PathVariable Integer orderId,@RequestHeader("abc") String token){
+        log.info("获取订单信息,入参:orderId = {},token={}",orderId,token);
         Order order = orderMapper.selectById(orderId);
         log.info("获取订单信息,出参:{}", JSON.toJSONString(order));
 

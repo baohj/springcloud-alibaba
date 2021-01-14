@@ -11,6 +11,7 @@ import com.tjgx.product.mapper.ProductMapper;
 import com.tjgx.product.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/product")
 @Api(tags = "订单模块【鲍红建】")
+@Slf4j
 public class ProductApi {
 
     @Autowired
@@ -39,12 +41,8 @@ public class ProductApi {
 
     @ApiOperation("获取产品")
     @GetMapping("/getProduct")
-    public String getProduct(){
-        try {
-            Thread.sleep(8000);
-        }catch (Exception e){
-
-        }
+    public String getProduct(@RequestHeader("abc") String token){
+        log.info("token={}",token);
         List<Product> product = productMapper.selectList(null);
         List<ProductOut> lt = product.stream().map(v -> {
             ProductOut productOut = new ProductOut();

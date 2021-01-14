@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 /**
 *@Description:
@@ -35,15 +38,21 @@ public class LoginFilter  implements GlobalFilter, Ordered {
      */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String token = exchange.getRequest().getQueryParams().getFirst("token");
+        String token = exchange.getRequest().getHeaders().getFirst("userid");
         log.info("token = {}",token);
+
       /*  String list = feignClient.getProduct();
         log.info("网关过滤器调用微服务:{}", JSON.toJSONString(list));*/
         /*if(StringUtils.isEmpty(token)){
             throw new MyException(ErrorCode.MYB_200012);
         }*/
+        //向headers中放文件，记得build
+        ServerHttpRequest host = exchange.getRequest().mutate().header("abc", "888").build();
+        //将现在的request 变成 change对象
+        ServerWebExchange build = exchange.mutate().request(host).build();
+
         //继续往下执行
-        return chain.filter(exchange);
+        return chain.filter(build);
     }
 
     /**
@@ -52,6 +61,6 @@ public class LoginFilter  implements GlobalFilter, Ordered {
      */
     @Override
     public int getOrder() {
-        return 0;
+        return 200;
     }
 }
