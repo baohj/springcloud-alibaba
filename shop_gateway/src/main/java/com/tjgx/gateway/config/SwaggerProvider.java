@@ -17,14 +17,14 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
-*@Description:
+*@Description: swagger 可以在多个微服务之间进行切换，动态从nacos获取服务，没有启动的服务不显示，
+ *               只能在启动的微服务之间进行切换
 *@Author: 鲍红建
 *@date: 2021/1/9
 */
 @Component
 @Primary
 @Slf4j
-/*@Profile({"dev","test"})*/
 public class SwaggerProvider implements SwaggerResourcesProvider {
 
     @Autowired

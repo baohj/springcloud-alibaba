@@ -17,6 +17,13 @@
             <groupId>com.tjgx</groupId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <!-- 以下这个是默认的template 引擎 -->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>2.1</version>
+        </dependency>
     </dependencies>
 
 
